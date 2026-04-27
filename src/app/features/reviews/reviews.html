@@ -1,0 +1,27 @@
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-wrapper">
+    <div class="test-logotypes">
+      <span>ARCHI-TECH</span>
+      <span>STRUCTURA</span>
+      <span>URBANIST</span>
+    </div>
+
+    <div class="swiper testimonial-swiper">
+      <div class="swiper-wrapper">
+        @for (testimonial of testimonials; track testimonial._id) {
+          <div class="swiper-slide">
+            <div class="testimonial-content">
+              <div class="quote-icon"><i class="ri-double-quotes-r"></i></div>
+              <p class="testimonial-text">{{ testimonial.message }}</p>
+              <div class="testimonial-author">
+                <h4>{{ testimonial.clientName }}</h4>
+                <span>{{ testimonial.clientRole }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>

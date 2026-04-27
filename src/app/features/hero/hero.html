@@ -1,0 +1,16 @@
+<header class="hero" [style.backgroundImage]="'url(' + heroData?.image + ')'">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="subheading">{{ heroData?.subheading }}</span>
+    <h1 class="main-heading" [innerHTML]="heroData?.title"></h1>
+    <p class="hero-text" [innerHTML]="heroData?.description"></p>
+    <div class="hero-buttons">
+      <a class="btn-primary" routerLink="/projects">Explore Projects</a>
+      <a class="btn-outline" routerLink="/about">Our Vision</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span class="scroll-text">Scroll To Discover</span>
+    <div class="H-line"></div>
+  </div>
+</header>

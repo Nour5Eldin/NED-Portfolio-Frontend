@@ -1,0 +1,35 @@
+<section class="advantage" id="advantage">
+  <div class="container">
+    <div class="advantage-wrapper">
+      <div class="advantage-content">
+        <h2>{{ advantageData?.mainTitle }}</h2>
+        <div class="advantage-list">
+          @for (feature of advantageData?.features; track feature._id; let i = $index) {
+            <div class="advantage-item">
+              <div class="advantage-icon">
+                <i
+                  [class]="
+                    i === 0
+                      ? 'ri-verified-badge-line'
+                      : i === 1
+                        ? 'ri-vip-diamond-line'
+                        : 'ri-star-line'
+                  "
+                ></i>
+              </div>
+              <div class="advantage-text">
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="advantage-image">
+        <div class="image-border">
+          <img [src]="advantageData?.mainImage" alt="NED Advantage" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

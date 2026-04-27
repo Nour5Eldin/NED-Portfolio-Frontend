@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@use "swiper/css";
+@use "swiper/css/pagination";
+@use "swiper/css/navigation";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Manrope:wght@300;500&display=swap');
+
+:root {
+    --primary-color: #c9a14a;
+    --secondary-color: #0d1b2a;
+    --neutral-color: #0b0b0b;
+    --umbra-color: #201f1f;
+    --text-pure-white: #ffffff;
+    --tertiary-color: #d4c3a3;
+    --heading-font: 'Noto Serif', serif;
+    --body-font: 'Manrope', sans-serif;
+    --label-font: 'Manrope', sans-serif;
+}
+body {
+    margin: 0;
+    background-color: #0b0b0b;
+}
+a, a:hover, a:focus, a:active {
+    text-decoration: none !important;
+}
+app-navbar, app-hero, app-footer,  main {
+    display: block;
+    width: 100%;
+}

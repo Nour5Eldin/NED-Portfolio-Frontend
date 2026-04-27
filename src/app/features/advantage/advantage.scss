@@ -1,0 +1,106 @@
+.advantage {
+    padding: 120px 0;
+    background-color: var(--neutral-color);
+    overflow: hidden;
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        max-width: 1400px;
+    }
+    .advantage-wrapper {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr; 
+        gap: 100px;
+        align-items: center;
+    }
+
+    h2 {
+        font-size: 3.2rem;
+        margin-bottom: 50px;
+        color: var(--text-pure-white);
+        opacity: 0.6;
+        font-family: var(--heading-font);
+    }
+
+    .advantage-item {
+        display: flex;
+        gap: 20px;
+        margin-bottom:60px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateX(10px); 
+            .advantage-icon {
+                background-color: var(--primary-color);
+                color: #000;
+            }
+        }
+
+        .advantage-icon {
+            min-width: 50px;
+            height: 50px;
+            border: 1px solid rgba(201, 161, 74, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            color: var(--primary-color);
+            transition: all 0.4s ease;
+            margin-top: 5px;
+        }
+
+        .advantage-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+                color: var(--text-pure-white);
+                margin: 0 0 10px 0;
+                letter-spacing: 1px;
+                text-transform: capitalize;
+            }
+            p {
+                font-size: 1rem;
+                line-height: 1.7;
+                opacity: 0.9;
+                color: var(--tertiary-color);
+                margin: 0;
+                max-width: 450px;
+            }
+        }
+    }
+
+    .advantage-image {
+        position: relative;
+        
+        .image-border {
+            position: relative;
+            padding: 5px;
+            border: 1px solid rgba(201, 161, 74, 0.2);
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: -15px;
+                right: -15px;
+                width: 100px;
+                height: 100px;
+                border-top: 2px solid var(--primary-color);
+                border-right: 2px solid var(--primary-color);
+                z-index: -1;
+            }
+        }
+
+        img {
+            width: 100%;
+            display: block;
+            filter: grayscale(20%);
+            transition: filter 0.5s ease;
+
+            &:hover { filter: grayscale(0%);}
+        }
+    }
+}

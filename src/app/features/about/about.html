@@ -1,0 +1,21 @@
+<section class="about" id="about">
+    <div class="container about-wrapper">
+        <div class="about-image">
+            <img [src]="aboutData?.image" alt="Luxury Texture" />
+            <div class="experience-badge">
+               <span class="number">{{ aboutData?.experienceYears }}</span>
+                <span class="label">Years of <br> Excellence</span>
+            </div>
+        </div>
+        <div class="about-content">
+            <div class="about-item">
+                <h3 class="subheading">{{ aboutData?.items?.ourVision?.title }}</h3>
+                <p style="white-space: pre-line;">{{ aboutData?.items?.ourVision?.text }}</p>
+            </div>
+            <div class="about-item">
+                <h3 class="subheading">{{ aboutData?.items?.ourMission?.title }}</h3>
+                <p style="white-space: pre-line;">{{ aboutData?.items?.ourMission?.text }}</p>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,29 @@
+<section class="projects-section" id="projects">
+  <div class="projects-container">
+    <div class="projects-header">
+      <h2 class="section-title">Our Projects</h2>
+      <div class="tabs-bar">
+        <button (click)="setTab('residential')" [class.active]="activeTab === 'residential'">RESIDENTIAL</button>
+        <button (click)="setTab('commercial')" [class.active]="activeTab === 'commercial'">COMMERCIAL</button>
+        <button (click)="setTab('coastal')" [class.active]="activeTab === 'coastal'">COASTAL</button>
+      </div>
+      <div class="header-line"></div>
+    </div>
+
+    <div class="projects-grid" *ngIf="filteredProjects.length > 0">
+      <div class="project-card" *ngFor="let project of filteredProjects; let i = index"
+           [class.project-main]="i === 0"
+           [class.project-small]="i !== 0">
+        <img [src]="project.image" [alt]="project.title">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <p class="project-location" *ngIf="i === 0">{{ project.location }}</p>
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-desc" *ngIf="i === 0">{{ project.description }}</p>
+          <p class="project-category" *ngIf="i !== 0">{{ project.category }}</p>
+          <a href="#" class="view-details" *ngIf="i === 0">VIEW DETAILS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
