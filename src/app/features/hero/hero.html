@@ -1,4 +1,5 @@
-<header class="hero" [style.backgroundImage]="'url(' + heroData?.image + ')'">
+<header class="hero">
+  <img class="hero-bg" [src]="heroData?.image" alt="hero background">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <span class="subheading">{{ heroData?.subheading }}</span>

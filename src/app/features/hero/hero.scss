@@ -12,7 +12,15 @@
     color: var(--text-pure-white);
     white-space: pre-line;
 }
-
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
 .hero-overlay {
     position: absolute;
     inset: 0;
