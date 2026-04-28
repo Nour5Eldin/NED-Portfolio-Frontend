@@ -1,4 +1,8 @@
-<section class="testimonials" id="testimonials">
+<section
+  *ngIf="testimonials.length > 0; else reviewsLoading"
+  class="testimonials"
+  id="testimonials"
+>
   <div class="testimonials-wrapper">
     <div class="test-logotypes">
       <span>ARCHI-TECH</span>
@@ -25,3 +29,9 @@
     </div>
   </div>
 </section>
+
+<ng-template #reviewsLoading>
+  <section class="testimonials placeholder" id="testimonials">
+    <div class="placeholder-box">Loading testimonials...</div>
+  </section>
+</ng-template>

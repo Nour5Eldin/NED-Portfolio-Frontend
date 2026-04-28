@@ -1,10 +1,10 @@
-<section class="advantage" id="advantage">
+<section *ngIf="advantageData; else advantageLoading" class="advantage" id="advantage">
   <div class="container">
     <div class="advantage-wrapper">
       <div class="advantage-content">
-        <h2>{{ advantageData?.mainTitle }}</h2>
+        <h2>{{ advantageData.mainTitle }}</h2>
         <div class="advantage-list">
-          @for (feature of advantageData?.features; track feature._id; let i = $index) {
+          @for (feature of advantageData.features; track feature._id; let i = $index) {
             <div class="advantage-item">
               <div class="advantage-icon">
                 <i
@@ -27,9 +27,15 @@
       </div>
       <div class="advantage-image">
         <div class="image-border">
-          <img [src]="advantageData?.mainImage" alt="NED Advantage" />
+          <img [src]="advantageData.mainImage" alt="NED Advantage" />
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<ng-template #advantageLoading>
+  <section class="advantage placeholder" id="advantage">
+    <div class="placeholder-box">Loading advantage section...</div>
+  </section>
+</ng-template>

@@ -3,18 +3,27 @@
     <div class="projects-header">
       <h2 class="section-title">Our Projects</h2>
       <div class="tabs-bar">
-        <button (click)="setTab('residential')" [class.active]="activeTab === 'residential'">RESIDENTIAL</button>
-        <button (click)="setTab('commercial')" [class.active]="activeTab === 'commercial'">COMMERCIAL</button>
-        <button (click)="setTab('coastal')" [class.active]="activeTab === 'coastal'">COASTAL</button>
+        <button (click)="setTab('residential')" [class.active]="activeTab === 'residential'">
+          RESIDENTIAL
+        </button>
+        <button (click)="setTab('commercial')" [class.active]="activeTab === 'commercial'">
+          COMMERCIAL
+        </button>
+        <button (click)="setTab('coastal')" [class.active]="activeTab === 'coastal'">
+          COASTAL
+        </button>
       </div>
       <div class="header-line"></div>
     </div>
 
-    <div class="projects-grid" *ngIf="filteredProjects.length > 0">
-      <div class="project-card" *ngFor="let project of filteredProjects; let i = index"
-           [class.project-main]="i === 0"
-           [class.project-small]="i !== 0">
-        <img [src]="project.image" [alt]="project.title">
+    <div class="projects-grid" *ngIf="filteredProjects.length > 0; else projectsLoading">
+      <div
+        class="project-card"
+        *ngFor="let project of filteredProjects; let i = index"
+        [class.project-main]="i === 0"
+        [class.project-small]="i !== 0"
+      >
+        <img [src]="project.image" [alt]="project.title" />
         <div class="card-overlay"></div>
         <div class="card-content">
           <p class="project-location" *ngIf="i === 0">{{ project.location }}</p>
@@ -25,5 +34,11 @@
         </div>
       </div>
     </div>
+
+    <ng-template #projectsLoading>
+      <div class="projects-grid placeholder">
+        <div class="placeholder-box">Loading projects...</div>
+      </div>
+    </ng-template>
   </div>
 </section>

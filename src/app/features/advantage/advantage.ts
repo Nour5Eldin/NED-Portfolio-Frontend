@@ -1,10 +1,11 @@
 import { Component, ViewEncapsulation, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api';
 
 @Component({
-  selector: 'app-advantage',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
+  selector: 'app-advantage',
   templateUrl: './advantage.html',
   styleUrls: ['./advantage.scss'],
   encapsulation: ViewEncapsulation.None,

@@ -1,16 +1,15 @@
-<section class="values" id="values">
+<section *ngIf="valuesData; else valuesLoading" class="values" id="values">
   <div class="value-wrapper">
     <div class="values-top">
       <div class="value-titles">
-        <span class="subheading">{{ valuesData?.subheading }}</span>
-        <h2>{{ valuesData?.title }}</h2>
+        <span class="subheading">{{ valuesData.subheading }}</span>
+        <h2>{{ valuesData.title }}</h2>
       </div>
-      <p class="values-intro" [innerHTML]="valuesData?.description">
-      </p>
+      <p class="values-intro" [innerHTML]="valuesData.description"></p>
     </div>
-    
+
     <div class="values-grid">
-      @for (card of valuesData?.cards; track card._id) {
+      @for (card of valuesData.cards; track card._id) {
         <div class="value-card">
           <div class="value-icon"><i [class]="card.icon"></i></div>
           <h3>{{ card.title }}</h3>
@@ -20,3 +19,9 @@
     </div>
   </div>
 </section>
+
+<ng-template #valuesLoading>
+  <section class="values placeholder" id="values">
+    <div class="placeholder-box">Loading values...</div>
+  </section>
+</ng-template>

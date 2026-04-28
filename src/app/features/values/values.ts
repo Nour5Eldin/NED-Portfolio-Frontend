@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api';
 
 @Component({
-  selector: 'app-values',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
+  selector: 'app-values',
   templateUrl: './values.html',
   styleUrls: ['./values.scss'],
   encapsulation: ViewEncapsulation.None,

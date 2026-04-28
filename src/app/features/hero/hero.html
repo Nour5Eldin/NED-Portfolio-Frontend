@@ -1,10 +1,10 @@
-<header class="hero">
-  <img class="hero-bg" [src]="heroData?.image" alt="hero background">
+<header *ngIf="heroData; else heroLoading" class="hero">
+  <img class="hero-bg" [src]="heroData.image" alt="hero background" />
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="subheading">{{ heroData?.subheading }}</span>
-    <h1 class="main-heading" [innerHTML]="heroData?.title"></h1>
-    <p class="hero-text" [innerHTML]="heroData?.description"></p>
+    <span class="subheading">{{ heroData.subheading }}</span>
+    <h1 class="main-heading" [innerHTML]="heroData.title"></h1>
+    <p class="hero-text" [innerHTML]="heroData.description"></p>
     <div class="hero-buttons">
       <a class="btn-primary" routerLink="/projects">Explore Projects</a>
       <a class="btn-outline" routerLink="/about">Our Vision</a>
@@ -15,3 +15,9 @@
     <div class="H-line"></div>
   </div>
 </header>
+
+<ng-template #heroLoading>
+  <section class="hero placeholder">
+    <div class="placeholder-box">Loading hero section...</div>
+  </section>
+</ng-template>

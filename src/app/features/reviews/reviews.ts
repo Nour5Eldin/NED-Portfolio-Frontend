@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewEncapsulation, Inject, PLATFORM_ID, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ApiService } from '../../services/api';
 import Swiper from 'swiper';
 import { Pagination, Autoplay } from 'swiper/modules';
@@ -7,6 +7,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 @Component({
   selector: 'app-reviews',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './reviews.html',
   styleUrls: ['./reviews.scss'],
   encapsulation: ViewEncapsulation.None,

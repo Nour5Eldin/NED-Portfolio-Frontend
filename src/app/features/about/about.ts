@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api';
 
 @Component({
-  selector: 'app-about',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
+  selector: 'app-about',
   templateUrl: './about.html',
   styleUrls: ['./about.scss'],
   encapsulation: ViewEncapsulation.None,
