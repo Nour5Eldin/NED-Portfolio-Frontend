@@ -8,7 +8,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
   selector: 'app-reviews',
   standalone: true,
   templateUrl: './reviews.html',
-  styleUrl: './reviews.scss',
+  styleUrls: ['./reviews.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -19,7 +19,7 @@ export class Reviews implements OnInit, AfterViewInit {
     private apiService: ApiService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.apiService.getTestimonials().subscribe({

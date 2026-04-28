@@ -4,9 +4,10 @@ import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-contact',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './contact.html',
-  styleUrl: './contact.scss',
+  styleUrls: ['./contact.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Contact implements OnInit {
@@ -17,7 +18,7 @@ export class Contact implements OnInit {
   constructor(
     private apiService: ApiService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.apiService.getContactInfo().subscribe({

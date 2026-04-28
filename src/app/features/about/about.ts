@@ -3,16 +3,17 @@ import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-about',
+  standalone: true,
   imports: [],
   templateUrl: './about.html',
-  styleUrl: './about.scss',
+  styleUrls: ['./about.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class About implements OnInit {
   aboutData: any;
 
-  constructor(private aboutService: ApiService, private cdr: ChangeDetectorRef) {}
+  constructor(private aboutService: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.aboutService.getAbout().subscribe({

@@ -4,15 +4,16 @@ import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-hero',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './hero.html',
-  styleUrl: './hero.scss',
+  styleUrls: ['./hero.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class Hero implements OnInit {
   heroData: any;
-  
-  constructor(private apiService: ApiService) {}
+
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.apiService.getHero().subscribe({

@@ -3,9 +3,10 @@ import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-advantage',
+  standalone: true,
   imports: [],
   templateUrl: './advantage.html',
-  styleUrl: './advantage.scss',
+  styleUrls: ['./advantage.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -15,7 +16,7 @@ export class Advantage implements OnInit {
   constructor(
     private apiService: ApiService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.apiService.getWhyChooseUs().subscribe({
