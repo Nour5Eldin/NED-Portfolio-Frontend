@@ -1,6 +1,5 @@
-import { Component, ViewEncapsulation, Inject, PLATFORM_ID, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { isPlatformBrowser } from '@angular/common';
 import { ApiService } from '../../services/api';
 
 @Component({
@@ -18,14 +17,11 @@ export class Projects implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    @Inject(PLATFORM_ID) private platformId: Object,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.loadProjects();
-    }
+    this.loadProjects();
   }
 
   loadProjects(): void {

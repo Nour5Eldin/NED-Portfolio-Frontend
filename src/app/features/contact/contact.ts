@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api';
 
@@ -17,25 +16,21 @@ export class Contact implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    @Inject(PLATFORM_ID) private platformId: Object,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.apiService.getContactInfo().subscribe({
-        next: (data: any) => {
-          this.contactInfo = data;
-          this.cdr.markForCheck();
-        },
-        error: (err) => console.error(err)
-      });
-    }
+    this.apiService.getContactInfo().subscribe({
+      next: (data: any) => {
+        this.contactInfo = data;
+        this.cdr.markForCheck();
+      },
+      error: (err) => console.error(err)
+    });
   }
 
   sendInquiry(): void {
-  console.log('Sending:', this.formData);
-  this.apiService.sendInquiry(this.formData).subscribe({
+    this.apiService.sendInquiry(this.formData).subscribe({
       next: () => {
         this.submitted = true;
         this.formData = { fullName: '', email: '', details: '' };

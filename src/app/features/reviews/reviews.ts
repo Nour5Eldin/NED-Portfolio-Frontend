@@ -22,15 +22,13 @@ export class Reviews implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.apiService.getTestimonials().subscribe({
-        next: (data: any) => {
-          this.testimonials = data;
-          this.cdr.markForCheck();
-        },
-        error: (err) => console.error(err)
-      });
-    }
+    this.apiService.getTestimonials().subscribe({
+      next: (data: any) => {
+        this.testimonials = data;
+        this.cdr.markForCheck();
+      },
+      error: (err) => console.error(err)
+    });
   }
 
   ngAfterViewInit() {
