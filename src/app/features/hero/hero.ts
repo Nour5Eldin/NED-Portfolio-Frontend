@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api';
@@ -14,7 +14,7 @@ import { ApiService } from '../../services/api';
 export class Hero implements OnInit {
   heroData: any;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.apiService.getHero().subscribe({
@@ -24,6 +24,7 @@ export class Hero implements OnInit {
           title: data.title?.replace(/\\n/g, '<br>'),
           description: data.description?.replace(/\\n/g, '<br>')
         };
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error fetching hero data:', err)
     });
