@@ -1,0 +1,59 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-logo" routerLink="/admin" style="cursor: pointer;">
+      <h2>NED</h2>
+      <span>Admin Console</span>
+    </div>
+    <nav class="admin-nav">
+      @for (section of sections; track section.name) {
+      <a [routerLink]="section.route" routerLinkActive="active" class="nav-item">
+        <i [class]="section.icon"></i>
+        <span>{{ section.name }}</span>
+      </a>
+      }
+    </nav>
+    <a routerLink="/admin" class="back-to-site">
+      <i class="ri-arrow-left-line"></i>
+      <span>Back to Site</span>
+    </a>
+  </aside>
+
+  <main class="admin-main">
+    @if (router.url === '/admin') {
+    <div class="admin-header">
+      <h1>Portfolio Management</h1>
+      <p>Monitor and update your website sections</p>
+    </div>
+    <div class="admin-list">
+      @for (section of sections; track section.name) {
+      <div class="admin-row" [routerLink]="section.route">
+        <div class="section-main-info">
+          <div class="icon-box">
+            <i [class]="section.icon"></i>
+          </div>
+          <div class="text-details">
+            <h3>{{ section.name }} Section</h3>
+            <p>Manage and update your website's {{ section.name | lowercase }} content</p>
+          </div>
+        </div>
+
+        <div class="section-meta">
+          <div class="status-indicator">
+            <span class="dot" [style.background-color]="section.status === 'published' ? '#2ecc71' : '#f1c40f'"></span>
+            <span>{{ section.status }}</span>
+          </div>
+          <div class="last-updated">
+            <i class="ri-history-line"></i>
+            <span>Last Updated: {{ section.lastUpdated | date:'MMM d, y, h:mm a' }}</span>
+          </div>
+          <div class="action-arrow">
+            <i class="ri-arrow-right-s-line"></i>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
+    <router-outlet></router-outlet>
+  </main>
+</div>

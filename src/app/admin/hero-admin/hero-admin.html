@@ -1,0 +1,41 @@
+<div class="admin-page">
+  <div class="admin-page-header">
+    <a routerLink="/admin" class="back-btn">
+      <i class="ri-arrow-left-line"></i> Back
+    </a>
+    <h1>Hero Section</h1>
+  </div>
+
+  <div class="admin-form">
+    @if (success) {
+      <div class="success-msg">Saved successfully!</div>
+    }
+
+    <div class="form-group">
+      <label>Subheading</label>
+      <input type="text" [(ngModel)]="heroData.subheading" placeholder="PRESTIGE & HERITAGE">
+    </div>
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" [(ngModel)]="heroData.title" placeholder="Nour Eldin Developments">
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea rows="4" [(ngModel)]="heroData.description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Background Image</label>
+      <div class="image-upload">
+        <img [src]="imagePreview || heroData.image" alt="Hero Image" class="preview-img">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
+      </div>
+    </div>
+
+    <button class="save-btn" (click)="save()" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
+</div>

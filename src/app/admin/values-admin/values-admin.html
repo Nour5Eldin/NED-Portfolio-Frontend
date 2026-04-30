@@ -1,0 +1,59 @@
+<div class="admin-page">
+  <div class="admin-page-header">
+    <a routerLink="/admin" class="back-btn">
+      <i class="ri-arrow-left-line"></i> Back
+    </a>
+    <h1>Values Section</h1>
+  </div>
+
+  <div class="admin-form">
+    @if (success) {
+      <div class="success-msg">Saved successfully!</div>
+    }
+
+    <div class="form-group">
+      <label>Subheading</label>
+      <input type="text" [(ngModel)]="valuesData.subheading">
+    </div>
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" [(ngModel)]="valuesData.title">
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea rows="3" [(ngModel)]="valuesData.description"></textarea>
+    </div>
+
+    <div class="section-divider">
+      <h3>Cards</h3>
+      <button class="add-btn" (click)="addCard()">+ Add Card</button>
+    </div>
+
+    @for (card of valuesData.cards; track card; let i = $index) {
+      <div class="admin-card-item">
+        <div class="card-header">
+          <span>Card {{ i + 1 }}</span>
+          <button class="delete-btn" (click)="removeCard(i)">Delete</button>
+        </div>
+        <div class="form-group">
+          <label>Icon Class</label>
+          <input type="text" [(ngModel)]="card.icon" placeholder="ri-compasses-fill">
+        </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" [(ngModel)]="card.title">
+        </div>
+        <div class="form-group">
+          <label>Text</label>
+          <textarea rows="3" [(ngModel)]="card.text"></textarea>
+        </div>
+      </div>
+    }
+
+    <button class="save-btn" (click)="save()" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
+</div>

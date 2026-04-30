@@ -1,0 +1,53 @@
+<div class="admin-page">
+  <div class="admin-page-header">
+    <a routerLink="/admin" class="back-btn">
+      <i class="ri-arrow-left-line"></i> Back
+    </a>
+    <h1>Advantage Section</h1>
+  </div>
+
+  <div class="admin-form">
+    @if (success) {
+      <div class="success-msg">Saved successfully!</div>
+    }
+
+    <div class="form-group">
+      <label>Main Title</label>
+      <input type="text" [(ngModel)]="advantageData.mainTitle">
+    </div>
+
+    <div class="form-group">
+      <label>Main Image</label>
+      <div class="image-upload">
+        <img [src]="imagePreview || advantageData.mainImage" alt="Advantage Image" class="preview-img">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
+      </div>
+    </div>
+
+    <div class="section-divider">
+      <h3>Features</h3>
+      <button class="add-btn" (click)="addFeature()">+ Add Feature</button>
+    </div>
+
+    @for (feature of advantageData.features; track feature; let i = $index) {
+      <div class="admin-card-item">
+        <div class="card-header">
+          <span>Feature {{ i + 1 }}</span>
+          <button class="delete-btn" (click)="removeFeature(i)">Delete</button>
+        </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" [(ngModel)]="feature.title">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea rows="3" [(ngModel)]="feature.description"></textarea>
+        </div>
+      </div>
+    }
+
+    <button class="save-btn" (click)="save()" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
+</div>

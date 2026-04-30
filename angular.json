@@ -33,6 +33,7 @@
             "styles": [
               "node_modules/swiper/swiper-bundle.min.css",
               "src/styles.scss",
+              "src/styles/admin.scss",
               "public/assets/fonts/remixicon.css"
             ],
             "server": "src/main.server.ts",

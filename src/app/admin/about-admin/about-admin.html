@@ -1,0 +1,51 @@
+<div class="admin-page">
+  <div class="admin-page-header">
+    <a routerLink="/admin" class="back-btn">
+      <i class="ri-arrow-left-line"></i> Back
+    </a>
+    <h1>About Section</h1>
+  </div>
+
+  <div class="admin-form">
+    @if (success) {
+      <div class="success-msg">Saved successfully!</div>
+    }
+
+    <div class="form-group">
+      <label>Experience Years</label>
+      <input type="text" [(ngModel)]="aboutData.experienceYears" placeholder="20+">
+    </div>
+
+    <div class="form-group">
+      <label>Our Vision Title</label>
+      <input type="text" [(ngModel)]="aboutData.items.ourVision.title">
+    </div>
+
+    <div class="form-group">
+      <label>Our Vision Text</label>
+      <textarea rows="4" [(ngModel)]="aboutData.items.ourVision.text"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Our Mission Title</label>
+      <input type="text" [(ngModel)]="aboutData.items.ourMission.title">
+    </div>
+
+    <div class="form-group">
+      <label>Our Mission Text</label>
+      <textarea rows="4" [(ngModel)]="aboutData.items.ourMission.text"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Image</label>
+      <div class="image-upload">
+        <img [src]="imagePreview || aboutData.image" alt="About Image" class="preview-img">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
+      </div>
+    </div>
+
+    <button class="save-btn" (click)="save()" [disabled]="loading">
+      {{ loading ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
+</div>

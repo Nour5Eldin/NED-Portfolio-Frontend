@@ -1,0 +1,64 @@
+<div class="admin-page">
+  <div class="admin-page-header">
+    <a routerLink="/admin" class="back-btn">
+      <i class="ri-arrow-left-line"></i> Back
+    </a>
+    <h1>Testimonials</h1>
+    <button class="add-btn" (click)="startAdd()">+ Add Testimonial</button>
+  </div>
+
+  @if (success) {
+    <div class="success-msg">Saved successfully!</div>
+  }
+
+  @if (!editingTestimonial && !isAdding) {
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Message</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (testimonial of testimonials; track testimonial._id) {
+          <tr>
+            <td>{{ testimonial.clientName }}</td>
+            <td>{{ testimonial.clientRole }}</td>
+            <td>{{ testimonial.message | slice:0:50 }}...</td>
+            <td>
+              <div class="table-actions">
+                <button class="add-btn" (click)="startEdit(testimonial)">Edit</button>
+                <button class="delete-btn" (click)="deleteTestimonial(testimonial._id)">Delete</button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  @if (editingTestimonial || isAdding) {
+    <div class="admin-form">
+      <div class="form-group">
+        <label>Client Name</label>
+        <input type="text" [(ngModel)]="currentTestimonial.clientName">
+      </div>
+      <div class="form-group">
+        <label>Client Role</label>
+        <input type="text" [(ngModel)]="currentTestimonial.clientRole">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea rows="5" [(ngModel)]="currentTestimonial.message"></textarea>
+      </div>
+      <div class="form-actions">
+        <button class="save-btn" (click)="save()" [disabled]="loading">
+          {{ loading ? 'Saving...' : 'Save' }}
+        </button>
+        <button class="delete-btn" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+  }
+</div>
