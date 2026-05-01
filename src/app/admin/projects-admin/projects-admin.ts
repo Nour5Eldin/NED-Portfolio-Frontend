@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api';
 
 @Component({
@@ -9,7 +9,6 @@ import { ApiService } from '../../services/api';
   imports: [FormsModule, RouterLink],
   templateUrl: './projects-admin.html',
   styleUrl: './projects-admin.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectsAdmin implements OnInit {
   projects: any[] = [];
@@ -27,23 +26,21 @@ export class ProjectsAdmin implements OnInit {
     category: 'residential',
     image: ''
   };
-  SECTION_NAME: string='';
-  constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private route: ActivatedRoute) {}
+
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const url = this.route?.snapshot?.url;
-    const path = url?.length ? url[url.length - 1]?.path || '' : '';
-    this.SECTION_NAME = path.charAt(0).toUpperCase() + path.slice(1);
     this.loadProjects();
   }
+
   get currentProject() {
     return this.isAdding ? this.newProject : this.editingProject;
   }
+
   loadProjects(): void {
     this.apiService.getProjects().subscribe({
-      next: (res: any) => {
-        this.projects = res?.data || res || [];
-        this.cdr.markForCheck();
+      next: (data: any) => {
+        this.projects = data || [];
       },
       error: (err) => console.error(err)
     });
@@ -54,7 +51,6 @@ export class ProjectsAdmin implements OnInit {
     this.imagePreview = null;
     this.selectedFile = null;
     this.isAdding = false;
-    this.cdr.markForCheck();
   }
 
   startAdd(): void {
@@ -63,13 +59,11 @@ export class ProjectsAdmin implements OnInit {
     this.imagePreview = null;
     this.selectedFile = null;
     this.newProject = { title: '', location: '', description: '', category: 'residential', image: '' };
-    this.cdr.markForCheck();
   }
 
   cancelEdit(): void {
     this.editingProject = null;
     this.isAdding = false;
-    this.cdr.markForCheck();
   }
 
   onFileSelected(event: any): void {
@@ -79,7 +73,6 @@ export class ProjectsAdmin implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imagePreview = e.target.result;
-        this.cdr.markForCheck();
       };
       reader.readAsDataURL(file);
     }
@@ -103,16 +96,15 @@ export class ProjectsAdmin implements OnInit {
       : this.apiService.updateProject(data._id, formData);
 
     request.subscribe({
-      next: (data: any) => {
+      next: () => {
         this.success = true;
         this.loading = false;
         this.editingProject = null;
         this.isAdding = false;
         this.loadProjects();
-        this.cdr.markForCheck();
-        setTimeout(() => { this.success = false; this.cdr.markForCheck(); }, 3000);
+        setTimeout(() => { this.success = false; }, 3000);
       },
-      error: (err) => { console.error(err); this.loading = false; this.cdr.markForCheck(); }
+      error: (err) => { console.error(err); this.loading = false; }
     });
   }
 

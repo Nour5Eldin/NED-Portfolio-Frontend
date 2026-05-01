@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api';
@@ -7,10 +7,9 @@ import { SlicePipe } from '@angular/common';
 @Component({
   selector: 'app-testimonials-admin',
   standalone: true,
-  imports: [FormsModule, RouterLink,SlicePipe],
+  imports: [FormsModule, RouterLink, SlicePipe],
   templateUrl: './testimonials-admin.html',
   styleUrl: './testimonials-admin.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TestimonialsAdmin implements OnInit {
   testimonials: any[] = [];
@@ -24,13 +23,10 @@ export class TestimonialsAdmin implements OnInit {
     clientRole: '',
     message: ''
   };
-  SECTION_NAME: string='';
-  constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private route: ActivatedRoute) {}
+
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const url = this.route?.snapshot?.url;
-    const path = url?.length ? url[url.length - 1]?.path || '' : '';
-    this.SECTION_NAME = path.charAt(0).toUpperCase() + path.slice(1);
     this.loadTestimonials();
   }
 
@@ -41,8 +37,7 @@ export class TestimonialsAdmin implements OnInit {
   loadTestimonials(): void {
     this.apiService.getTestimonials().subscribe({
       next: (data: any) => {
-        this.testimonials = data;
-        this.cdr.markForCheck();
+        this.testimonials = data || [];
       },
       error: (err) => console.error(err)
     });
@@ -51,20 +46,17 @@ export class TestimonialsAdmin implements OnInit {
   startEdit(testimonial: any): void {
     this.editingTestimonial = { ...testimonial };
     this.isAdding = false;
-    this.cdr.markForCheck();
   }
 
   startAdd(): void {
     this.isAdding = true;
     this.editingTestimonial = null;
     this.newTestimonial = { clientName: '', clientRole: '', message: '' };
-    this.cdr.markForCheck();
   }
 
   cancelEdit(): void {
     this.editingTestimonial = null;
     this.isAdding = false;
-    this.cdr.markForCheck();
   }
 
   save(): void {
@@ -82,10 +74,9 @@ export class TestimonialsAdmin implements OnInit {
         this.editingTestimonial = null;
         this.isAdding = false;
         this.loadTestimonials();
-        this.cdr.markForCheck();
-        setTimeout(() => { this.success = false; this.cdr.markForCheck(); }, 3000);
+        setTimeout(() => { this.success = false; }, 3000);
       },
-      error: (err) => { console.error(err); this.loading = false; this.cdr.markForCheck(); }
+      error: (err) => { console.error(err); this.loading = false; }
     });
   }
 
