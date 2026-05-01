@@ -17,7 +17,7 @@ export class HeroAdmin implements OnInit {
   imagePreview: string | null = null;
   loading = false;
   success = false;
-  SECTION_NAME: string='';
+  SECTION_NAME: string = '';
 
   constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private route: ActivatedRoute) {
   }
@@ -27,24 +27,21 @@ export class HeroAdmin implements OnInit {
     const path = url?.length ? url[url.length - 1]?.path || '' : '';
     this.SECTION_NAME = path.charAt(0).toUpperCase() + path.slice(1);
 
-    this.apiService.getHero(true).subscribe({
-      next: (data: any) => {
-        this.heroData = data;
-        this.cdr.markForCheck();
+    this.apiService.getHero().subscribe({
+      next: (res: any) => {
+        this.heroData = {
+          ...(res?.data || res),
+          title: (res?.data || res)?.title?.replace(/\\n/g, '<br>'),
+          description: (res?.data || res)?.description?.replace(/\\n/g, '<br>')
+        };
       },
       error: (err) => console.error(err)
     });
   }
-
-  onInputChange(): void {
-    this.apiService.setAsDraft(this.SECTION_NAME);
-  }
-
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
-      this.apiService.setAsDraft(this.SECTION_NAME);
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imagePreview = e.target.result;
@@ -54,7 +51,7 @@ export class HeroAdmin implements OnInit {
     }
   }
 
-  save(status: string = 'published'): void {
+  save(): void {
     this.loading = true;
     const formData = new FormData();
     formData.append('subheading', this.heroData.subheading || '');
@@ -70,11 +67,6 @@ export class HeroAdmin implements OnInit {
         this.heroData = data;
         this.success = true;
         this.loading = false;
-        if (status === 'published') {
-          this.apiService.setAsPublished(this.SECTION_NAME, data);
-        } else {
-          this.apiService.setAsDraft(this.SECTION_NAME);
-        }
         this.cdr.markForCheck();
         setTimeout(() => { this.success = false; this.cdr.markForCheck(); }, 3000);
       },

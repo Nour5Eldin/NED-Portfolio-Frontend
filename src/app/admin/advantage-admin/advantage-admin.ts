@@ -32,14 +32,11 @@ export class AdvantageAdmin implements OnInit {
       error: (err) => console.error(err)
     });
   }
-  onInputChange(): void {
-    this.apiService.setAsDraft(this.SECTION_NAME);
-  }
+
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
-      this.onInputChange();
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imagePreview = e.target.result;
@@ -69,11 +66,10 @@ export class AdvantageAdmin implements OnInit {
     }
 
     this.apiService.updateWhyChooseUs(this.advantageData._id, formData).subscribe({
-      next: (data: any) => {
-        this.advantageData = data;
+      next: (res: any) => {
+        this.advantageData = res?.data || res;
         this.success = true;
         this.loading = false;
-        this.apiService.setAsPublished(this.SECTION_NAME, data);
         this.cdr.markForCheck();
         setTimeout(() => { this.success = false; this.cdr.markForCheck(); }, 3000);
       },

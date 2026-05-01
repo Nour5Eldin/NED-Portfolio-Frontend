@@ -41,8 +41,8 @@ export class ProjectsAdmin implements OnInit {
   }
   loadProjects(): void {
     this.apiService.getProjects().subscribe({
-      next: (data: any) => {
-        this.projects = data;
+      next: (res: any) => {
+        this.projects = res?.data || res || [];
         this.cdr.markForCheck();
       },
       error: (err) => console.error(err)
@@ -109,7 +109,6 @@ export class ProjectsAdmin implements OnInit {
         this.editingProject = null;
         this.isAdding = false;
         this.loadProjects();
-        this.apiService.setAsPublished(this.SECTION_NAME, data );
         this.cdr.markForCheck();
         setTimeout(() => { this.success = false; this.cdr.markForCheck(); }, 3000);
       },

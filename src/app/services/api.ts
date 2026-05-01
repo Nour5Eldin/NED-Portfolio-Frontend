@@ -8,70 +8,45 @@ import { environment } from '../../environments/environment';
 export class ApiService {
   private apiUrl = environment.apiUrl;
   public sectionStatus = [
-    { name: 'Hero', route: '/admin/hero', icon: 'ri-home-line',status: 'draft', count: 0, lastUpdated: new Date() },
-    { name: 'About', route: '/admin/about', icon: 'ri-information-line', status: 'draft', count: 0, lastUpdated: new Date() },
-    { name: 'Values', route: '/admin/values', icon: 'ri-award-line', status: 'draft', count: 0, lastUpdated: new Date() },
+    { name: 'Hero', route: '/admin/hero', icon: 'ri-home-line', count: 0, lastUpdated: new Date() },
+    { name: 'About', route: '/admin/about', icon: 'ri-information-line', count: 0, lastUpdated: new Date() },
+    { name: 'Values', route: '/admin/values', icon: 'ri-award-line', count: 0, lastUpdated: new Date() },
     { name: 'Projects', route: '/admin/projects', icon: 'ri-building-line', status: 'draft', count: 0, lastUpdated: new Date() },
-    { name: 'Advantage', route: '/admin/advantage', icon: 'ri-star-line', status: 'draft', count: 0, lastUpdated: new Date() },
-    { name: 'Testimonials', route: '/admin/testimonials', icon: 'ri-chat-quote-line', status: 'draft', count: 0, lastUpdated: new Date() },
-    { name: 'Contact', route: '/admin/contact', icon: 'ri-phone-line', status: 'draft', count: 0, lastUpdated: new Date() },
+    { name: 'Advantage', route: '/admin/advantage', icon: 'ri-star-line', count: 0, lastUpdated: new Date() },
+    { name: 'Testimonials', route: '/admin/testimonials', icon: 'ri-chat-quote-line', count: 0, lastUpdated: new Date() },
+    { name: 'Contact', route: '/admin/contact', icon: 'ri-phone-line', count: 0, lastUpdated: new Date() },
   ]
   constructor(private http: HttpClient) { }
-  setAsDraft(sectionName: string) {
-    const section = this.sectionStatus.find(s => s.name === sectionName);
-    if (section && section.status !== 'draft') {
-      section.status = 'draft'
-    }
-  }
-  setAsPublished(sectionName: string, serverResponse: any) {
-    const section = this.sectionStatus.find(s => s.name === sectionName);
-    if (section && serverResponse) {
-      section.status = 'published';
-      section.lastUpdated = new Date(serverResponse.updatedAt || serverResponse.date);
-      if (serverResponse.count !== undefined) {
-        section.count = serverResponse.count
-      }
-    }
-  }
-  getHero(isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/hero?mode=admin` : `${this.apiUrl}/api/hero`;
-    return this.http.get(url);
+  getHero() {
+    return this.http.get(`${this.apiUrl}/api/hero`);
   }
 
-  getAbout(isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/about?mode=admin` : `${this.apiUrl}/api/about`;
-    return this.http.get(url);
+  getAbout() {
+    return this.http.get(`${this.apiUrl}/api/about`);
   }
 
-  getValues(isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/values?mode=admin` : `${this.apiUrl}/api/values`;
-    return this.http.get(url);
+  getValues() {
+    return this.http.get(`${this.apiUrl}/api/values`);
   }
 
-  getProjects(isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/projects?mode=admin` : `${this.apiUrl}/api/projects`;
-    return this.http.get(url)
+  getProjects() {
+    return this.http.get(`${this.apiUrl}/api/projects`)
   }
-  getWhyChooseUs(isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/whychooseus?mode=admin` : `${this.apiUrl}/api/whychooseus`;
-    return this.http.get(url);
+  getWhyChooseUs() {
+    return this.http.get(`${this.apiUrl}/api/whychooseus`);
   }
 
-  getTestimonials(isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/testimonials?mode=admin` : `${this.apiUrl}/api/testimonials`;
-    return this.http.get(url);
+  getTestimonials() {
+    return this.http.get(`${this.apiUrl}/api/testimonials`);
   }
-  getContactInfo(isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/contact/info?mode=admin` : `${this.apiUrl}/api/contact/info`;
-    return this.http.get(url);
+  getContactInfo() {
+    return this.http.get(`${this.apiUrl}/api/contact/info`);
   }
-  updateContactInfo(data: any, isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/contact/info?mode=admin` : `${this.apiUrl}/api/contact/info`;
-    return this.http.put(url, data);
+  updateContactInfo(data: any) {
+    return this.http.put(`${this.apiUrl}/api/contact/info`, data);
   }
-  sendInquiry(data: any, isAdmin: boolean = false) {
-    const url = isAdmin ? `${this.apiUrl}/api/inquiry?mode=admin` : `${this.apiUrl}/api/contact/inquiry`;
-    return this.http.post(url, data);
+  sendInquiry(data: any) {
+    return this.http.post(`${this.apiUrl}/api/contact/inquiry`, data);
   }
   //dashboard updates
   updateHero(id: string, formData: FormData) {

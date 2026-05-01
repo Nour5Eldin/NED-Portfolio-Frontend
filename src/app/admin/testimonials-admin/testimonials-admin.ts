@@ -82,7 +82,6 @@ export class TestimonialsAdmin implements OnInit {
         this.editingTestimonial = null;
         this.isAdding = false;
         this.loadTestimonials();
-        this.apiService.setAsPublished(this.SECTION_NAME, {});
         this.cdr.markForCheck();
         setTimeout(() => { this.success = false; this.cdr.markForCheck(); }, 3000);
       },

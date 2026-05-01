@@ -71,7 +71,6 @@ export class ContactAdmin implements OnInit {
         this.contactData = data;
         this.success = true;
         this.loading = false;
-        this.apiService.setAsPublished(this.SECTION_NAME, {});
         this.cdr.markForCheck();
         setTimeout(() => { this.success = false; this.cdr.markForCheck(); }, 3000);
       },

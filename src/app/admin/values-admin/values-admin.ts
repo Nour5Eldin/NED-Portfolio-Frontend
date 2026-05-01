@@ -23,8 +23,8 @@ export class ValuesAdmin implements OnInit {
     const path = url?.length ? url[url.length - 1]?.path || '' : '';
     this.SECTION_NAME = path.charAt(0).toUpperCase() + path.slice(1);
     this.apiService.getValues().subscribe({
-      next: (data: any) => {
-        this.valuesData = data;
+      next: (res: any) => {
+        this.valuesData = res?.data || res;
         this.cdr.markForCheck();
       },
       error: (err) => console.error(err)
@@ -44,11 +44,10 @@ export class ValuesAdmin implements OnInit {
   save(): void {
     this.loading = true;
     this.apiService.updateValues(this.valuesData._id, this.valuesData).subscribe({
-      next: (data: any) => {
-        this.valuesData = data;
+      next: (res: any) => {
+        this.valuesData = res?.data || res || [];
         this.success = true;
         this.loading = false;
-        this.apiService.setAsPublished(this.SECTION_NAME, {});
         this.cdr.markForCheck();
         setTimeout(() => { this.success = false; this.cdr.markForCheck(); }, 3000);
       },
