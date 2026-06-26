@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://ned-portfolio-backend-production.up.railway.app'
+    apiUrl:'ned-portfolio-backend-l3m1xke9k-nour5eldins-projects.vercel.app'
 };
